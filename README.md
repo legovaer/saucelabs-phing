@@ -11,7 +11,7 @@ Installation
 This project is build to run on Jenkins combined with Phing. If you want to use this phing build, you need to add it in seperate folder in your project's workspace (e.g. build).
 
 
-Version log
+Change log
 -----------
 
 ### 1.0
