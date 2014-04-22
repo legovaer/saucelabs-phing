@@ -1,24 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>    
-<project name="saucelabs-behat" default="init">
+<project name="saucelabs-phing" default="init">
 <target name="init" depends="load-properties, run-check, clean-up, prepare, init-ad-hoc-tasks, generate-json-file, generate-yaml, loop-yamls"></target>
 
-    <target name="run-check">
-	<if>
-	    <not>
-		<available file="${test.behatymlFile}" />
-	    </not>
-	    <then>
-		<fail message="Unable to find your default behat.yml file" />
-	    </then>	
-	</if>
-    </target>
-
     <target name="load-properties">
+        <property file="slphing.properties" />
         <property name="test.testName" value="${testname}"/>
         <property name="test.outputDir" value="${phing.dir}/tmp"/>
         <property name="test.jsonFile" value="${test.outputDir}/browsers.json"/>
-	<property name="test.wdhostFile" value="${test.outputDir}/wdhost"/>
-	<property name="test.behatymlFile" value="${phing.dir}/behat.yml"/>
+	    <property name="test.wdhostFile" value="${test.outputDir}/wdhost"/>
+    </target>
+
+    <target name="run-check">
+        <if>
+            <not>
+                <available file="${test.behatYmlLoc}" />
+            </not>
+            <then>
+                <fail message="Unable to find your default behat.yml file" />
+            </then>
+        </if>
+
+        <if>
+            <or>
+                <not>
+                    <isset property="test.behatBinLoc"/>
+                </not>
+                <not>
+                    <isset property="test.behatYmlLoc"/>
+                </not>
+            </or>
+            <then>
+                <fail message="Please complete the slphing.properties file."/>
+            </then>
+        </if>
+
     </target>
 
     <target name="clean-up">
@@ -105,8 +120,8 @@
                             $yaml = preg_replace($regex_patterns,$regex_replacements,$yaml);
 
                             $fileName = $this->outputDir."/".time()."-test".$counter.".yml";
-			    file_put_contents($fileName,$behatyml.PHP_EOL);
-			    $add = trim($yaml);
+			                file_put_contents($fileName,$behatyml.PHP_EOL);
+			                $add = trim($yaml);
                             file_put_contents($fileName,$add.PHP_EOL, FILE_APPEND);
 
                             $counter++;
@@ -134,7 +149,7 @@
             </then>
             <else>
 		<loadfile file="${test.wdhostFile}" property="wdhostFile"/>
-		<generateYml testName="${test.testName}" jsonFile="${test.jsonFile}" outputDir="${test.outputDir}" wdhostFile="${test.wdhostFile}" behatymlFile="${test.behatymlFile}"/>
+		<generateYml testName="${test.testName}" jsonFile="${test.jsonFile}" outputDir="${test.outputDir}" wdhostFile="${test.wdhostFile}" behatymlFile="${test.behatYmlLoc}"/>
             </else>
         </if>
     </target>
@@ -148,8 +163,7 @@
     </target>
 
    <target name="run-behat">
-	<exec command="/var/lib/behat/bin/behat --config ${absfilename} /var/lib/behat/builds/bpostsd/features/customerRegister-step2.feature" passthru="true"/>
-	<echo message="behat --config ${absfilename}"/>
+	<exec command="${test.behatBinLoc} --config ${absfilename} --profile sauce" passthru="true"/>
    </target>
 </project>
 
