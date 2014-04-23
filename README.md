@@ -20,3 +20,4 @@ Change log
 * Renamed the project to "saucelabs-phing"
 * Issue [#5](issues/5) : Changed the hard-coded behat run to a more flexible one.
 * Issue [#4](issues/4) : Added a property file where the user can specify the location of his behat.yml file & the location of the behat executable
+* Added the location of the features folder in the properties file

@@ -12,6 +12,23 @@
 
     <target name="run-check">
         <if>
+            <or>
+                <not>
+                    <isset property="test.behatBinLoc"/>
+                </not>
+                <not>
+                    <isset property="test.behatYmlLoc"/>
+                </not>
+                <not>
+                    <isset property="test.behatFeaturesLoc"/>
+                </not>
+            </or>
+            <then>
+                <fail message="Please complete the slphing.properties file."/>
+            </then>
+        </if>
+
+        <if>
             <not>
                 <available file="${test.behatYmlLoc}" />
             </not>
@@ -21,16 +38,20 @@
         </if>
 
         <if>
-            <or>
-                <not>
-                    <isset property="test.behatBinLoc"/>
-                </not>
-                <not>
-                    <isset property="test.behatYmlLoc"/>
-                </not>
-            </or>
+            <not>
+                <available file="${test.behatBinLoc}"/>
+            </not>
             <then>
-                <fail message="Please complete the slphing.properties file."/>
+                <fail message="Unable to find your behat application." />
+            </then>
+        </if>
+
+        <if>
+            <not>
+                <available filepath="${test.behatFeaturesLoc}"/>
+            </not>
+            <then>
+                <fail message="Enable to find your Behat features directory." />
             </then>
         </if>
 
@@ -163,7 +184,7 @@
     </target>
 
    <target name="run-behat">
-	<exec command="${test.behatBinLoc} --config ${absfilename} --profile sauce" passthru="true"/>
+	<exec command="${test.behatBinLoc} --config ${absfilename} --profile sauce ${test.behatFeaturesLoc}" passthru="true"/>
    </target>
 </project>
 
