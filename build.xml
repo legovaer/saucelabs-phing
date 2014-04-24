@@ -106,9 +106,6 @@
                         if(is_array($val)) {
                             $yaml = array(
                                 'sauce' => array(
-                                    'paths' => array(
-                                        bootstrap => %behat.paths.features%/bootstrap
-                                    ),
                                     'filters' => array(
                                         'tags' => '@multibrowsers'
                                     ),
