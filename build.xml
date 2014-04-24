@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>    
+<?xml version="1.0" encoding="UTF-8"?>
 <project name="saucelabs-phing" default="init">
-<target name="init" depends="load-properties, run-check, clean-up, prepare, init-ad-hoc-tasks, generate-json-file, generate-yaml, loop-yamls"></target>
+    <target name="init" depends="load-properties, run-check, clean-up, prepare, init-ad-hoc-tasks, generate-json-file, generate-yaml, loop-yamls"></target>
 
     <target name="load-properties">
         <property file="slphing.properties" />
         <property name="test.testName" value="${testname}"/>
         <property name="test.outputDir" value="${phing.dir}/tmp"/>
         <property name="test.jsonFile" value="${test.outputDir}/browsers.json"/>
-	    <property name="test.wdhostFile" value="${test.outputDir}/wdhost"/>
+        <property name="test.wdhostFile" value="${test.outputDir}/wdhost"/>
     </target>
 
     <target name="run-check">
@@ -46,15 +46,6 @@
             </then>
         </if>
 
-        <if>
-            <not>
-                <available filepath="${test.behatFeaturesLoc}"/>
-            </not>
-            <then>
-                <fail message="Enable to find your Behat features directory." />
-            </then>
-        </if>
-
     </target>
 
     <target name="clean-up">
@@ -62,9 +53,9 @@
     </target>
 
     <target name="prepare">
-	<mkdir dir="${test.outputDir}" />
-	<touch file="${test.jsonFile}" />
-	<touch file="${test.wdhostFile}" />
+        <mkdir dir="${test.outputDir}" />
+        <touch file="${test.jsonFile}" />
+        <touch file="${test.wdhostFile}" />
     </target>
 
     <target name="init-ad-hoc-tasks">
@@ -74,9 +65,8 @@
                 private $name = null;
                 private $jsonFile = null;
                 private $outputDir = null;
-		private $wdhostFile = null;
-		private $behatymlFile = null; 
-
+                private $wdhostFile = null;
+                private $behatymlFile = null;
                 function setTestName($name) {
                     $this->name = $name;
                 }
@@ -89,20 +79,20 @@
                     $this->outputDir = $outputDir;
                 }
 
-		function setWdhostFile($wdhostFile) {
-		    $this->wdhostFile = $wdhostFile;
-		}
+                function setWdhostFile($wdhostFile) {
+                    $this->wdhostFile = $wdhostFile;
+                }
 
-		function setBehatymlFile($behatymlFile) {
-		    $this->behatymlFile = $behatymlFile;
-		}
+                function setBehatymlFile($behatymlFile) {
+                    $this->behatymlFile = $behatymlFile;
+                }
 
                 function main() {
-		    $wd_host = file_get_contents($this->wdhostFile);
+                    $wd_host = file_get_contents($this->wdhostFile);
                     $wd_host = trim(preg_replace('/\s\s+/', '', $wd_host));
-		    $json = file_get_contents($this->jsonFile);
-		    $behatyml = file_get_contents($this->behatymlFile);
-		var_dump($behatyml); 
+                    $json = file_get_contents($this->jsonFile);
+                    $behatyml = file_get_contents($this->behatymlFile);
+                var_dump($behatyml);
                     if(!is_dir($this->outputDir)) {
                         mkdir($this->outputDir, 0777, TRUE);
                     }
@@ -110,13 +100,15 @@
                     $jsonIterator = new RecursiveIteratorIterator(
                         new RecursiveArrayIterator(json_decode($json, TRUE)),
                         RecursiveIteratorIterator::SELF_FIRST);
-
                     $counter = 1;
 
                     foreach ($jsonIterator as $key => $val) {
                         if(is_array($val)) {
                             $yaml = array(
                                 'sauce' => array(
+                                    'paths' => array(
+                                        bootstrap: %behat.paths.features%/bootstrap
+                                    ),
                                     'filters' => array(
                                         'tags' => '@multibrowsers'
                                     ),
@@ -141,8 +133,8 @@
                             $yaml = preg_replace($regex_patterns,$regex_replacements,$yaml);
 
                             $fileName = $this->outputDir."/".time()."-test".$counter.".yml";
-			                file_put_contents($fileName,$behatyml.PHP_EOL);
-			                $add = trim($yaml);
+                                        file_put_contents($fileName,$behatyml.PHP_EOL);
+                                        $add = trim($yaml);
                             file_put_contents($fileName,$add.PHP_EOL, FILE_APPEND);
 
                             $counter++;
@@ -154,12 +146,12 @@
     </target>
 
     <target name="generate-json-file">
-	<exec command="echo ${SAUCE_ONDEMAND_BROWSERS} | python -mjson.tool > ${test.jsonFile}" escape="false"/>
-	<exec command="echo ${SAUCE_USER_NAME}:${SAUCE_API_KEY}@${SELENIUM_HOST}/wd/hub > ${test.wdhostFile}" escape="false"/>
+        <exec command="echo ${SAUCE_ONDEMAND_BROWSERS} | python -mjson.tool > ${test.jsonFile}" escape="false"/>
+        <exec command="echo ${SAUCE_USER_NAME}:${SAUCE_API_KEY}@${SELENIUM_HOST}/wd/hub > ${test.wdhostFile}" escape="false"/>
     </target>
 
     <target name="generate-yaml">
-	<loadfile file="${test.jsonFile}" property="jsonFileContent" />
+        <loadfile file="${test.jsonFile}" property="jsonFileContent" />
         <if>
             <or>
                 <equals arg1="${jsonFileContent}" arg2="No JSON object could be decoded" />
@@ -169,8 +161,8 @@
                 <fail message="No browser(s) were selected." />
             </then>
             <else>
-		<loadfile file="${test.wdhostFile}" property="wdhostFile"/>
-		<generateYml testName="${test.testName}" jsonFile="${test.jsonFile}" outputDir="${test.outputDir}" wdhostFile="${test.wdhostFile}" behatymlFile="${test.behatYmlLoc}"/>
+                <loadfile file="${test.wdhostFile}" property="wdhostFile"/>
+                <generateYml testName="${test.testName}" jsonFile="${test.jsonFile}" outputDir="${test.outputDir}" wdhostFile="${test.wdhostFile}" behatymlFile="${test.behatYmlLoc}"/>
             </else>
         </if>
     </target>
@@ -183,9 +175,8 @@
         </foreach>
     </target>
 
-   <target name="run-behat">
-	<exec command="${test.behatBinLoc} --config ${absfilename} --profile sauce ${test.behatFeaturesLoc}" passthru="true"/>
-   </target>
+    <target name="run-behat">
+        <echo message="${test.behatBinLoc} --config ${absfilename} --profile sauce ${test.behatFeaturesLoc}"/>
+        <exec command="${test.behatBinLoc} --config ${absfilename} --profile sauce ${test.behatFeaturesLoc}" passthru="true"/>
+    </target>
 </project>
-
-
