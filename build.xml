@@ -107,7 +107,7 @@
                             $yaml = array(
                                 'sauce' => array(
                                     'paths' => array(
-                                        bootstrap: %behat.paths.features%/bootstrap
+                                        bootstrap => %behat.paths.features%/bootstrap
                                     ),
                                     'filters' => array(
                                         'tags' => '@multibrowsers'
