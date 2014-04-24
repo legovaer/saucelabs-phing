@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="saucelabs-phing" default="init">
+<project name="saucelabs-phing" default="init" basedir="../workspace">
     <target name="init" depends="load-properties, run-check, clean-up, prepare, init-ad-hoc-tasks, generate-json-file, generate-yaml, loop-yamls"></target>
 
     <target name="load-properties">
