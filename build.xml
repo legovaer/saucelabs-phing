@@ -173,7 +173,7 @@
     </target>
 
     <target name="run-behat">
-        <echo message="${test.behatBinLoc} --config ${absfilename} --profile sauce ${test.behatFeaturesLoc}"/>
+        <echo message="${test.behatBinLoc} --config ${filename} --profile sauce ${test.behatFeaturesLoc}"/>
         <copy file="${absfilename}" tofile="${filename}" overwrite="true"/>
         <exec command="${test.behatBinLoc} --config ${filename} --profile sauce ${test.behatFeaturesLoc}" passthru="true"/>
         <!--<exec command="rm ${filename}"/>-->
