@@ -104,9 +104,20 @@
                     $counter = 1;
 
                     foreach ($jsonIterator as $key => $val) {
+                        $clOS = str_replace(' ','',$val['os']);
+                        $clBrowser = str_replace(' ','',$val['browser']);
+                        $clVersion = str_replace(' ','',$val['browser-version']);
+
+                        $htmlOutputPath = "reports/html/".$clOs."-".$clBrowser."-".$clVersion.".html";
+
                         if(is_array($val)) {
                             $yaml = array(
                                 'sauce' => array(
+                                    'formatter' => array(
+                                        name: pretty,junit,html
+                                        parameters:
+                                            output_path: null,reports/xml/junit,$htmlOutputPath
+                                    ),
                                     'filters' => array(
                                         'tags' => '@multibrowsers'
                                     ),
@@ -134,10 +145,6 @@
                             $regex_patterns = array("/---\n/","/\.\.\./","/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/","/|/");
                             $regex_replacements = array("","","\n","");
                             $yaml = preg_replace($regex_patterns,$regex_replacements,$yaml);
-
-                            $clOS = str_replace(' ','',$val['os']);
-                            $clBrowser = str_replace(' ','',$val['browser']);
-                            $clVersion = str_replace(' ','',$val['browser-version']);
                             $fileName = $this->outputDir."/".$clOS."-".$clBrowser."-".$clVersion.".yml";
 
                             file_put_contents($fileName,$behatyml.PHP_EOL);
