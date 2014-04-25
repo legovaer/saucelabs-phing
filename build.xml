@@ -116,9 +116,10 @@
                             $yaml = array(
                                 'sauce' => array(
                                     'formatter' => array(
-                                        name: pretty,junit,html
-                                        parameters:
-                                            output_path: null,reports/xml/junit,$htmlOutputPath
+                                        name => pretty,junit,html,
+                                        parameters => array(
+                                            output_path => null,reports/xml/junit,$htmlOutputPath
+                                        )
                                     ),
                                     'filters' => array(
                                         'tags' => '@multibrowsers'
