@@ -109,6 +109,11 @@
                                     'filters' => array(
                                         'tags' => '@multibrowsers'
                                     ),
+                                    'contect' => array(
+                                        'parameters' => array(
+                                            'test-name' => $this->name
+                                        )
+                                    ),
                                     'extensions' => array(
                                         'Behat\MinkExtension\Extension' => array(
                                             'selenium2' => array(
@@ -173,9 +178,8 @@
     </target>
 
     <target name="run-behat">
-        <echo message="${test.behatBinLoc} --config ${filename} --profile sauce ${test.behatFeaturesLoc}"/>
         <copy file="${absfilename}" tofile="${filename}" overwrite="true"/>
         <exec command="${test.behatBinLoc} --config ${filename} --profile sauce ${test.behatFeaturesLoc}" passthru="true"/>
-        <!--<exec command="rm ${filename}"/>-->
+        <exec command="rm ${filename}"/>
     </target>
 </project>
