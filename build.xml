@@ -93,7 +93,7 @@
                     $wd_host = trim(preg_replace('/\s\s+/', '', $wd_host));
                     $json = file_get_contents($this->jsonFile);
                     $behatyml = file_get_contents($this->behatymlFile);
-                var_dump($behatyml);
+
                     if(!is_dir($this->outputDir)) {
                         mkdir($this->outputDir, 0777, TRUE);
                     }
