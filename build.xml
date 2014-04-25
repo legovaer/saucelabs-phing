@@ -55,6 +55,8 @@
     <target name="prepare">
         <mkdir dir="${test.outputDir}" />
         <mkdir dir="reports"/>
+        <mkdir dir="reports/html"/>
+        <mkdir dir="reports/xml"/>
         <touch file="${test.jsonFile}" />
         <touch file="${test.wdhostFile}" />
     </target>
