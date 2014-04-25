@@ -54,6 +54,7 @@
 
     <target name="prepare">
         <mkdir dir="${test.outputDir}" />
+        <mkdir dir="reports"/>
         <touch file="${test.jsonFile}" />
         <touch file="${test.wdhostFile}" />
     </target>
@@ -134,9 +135,13 @@
                             $regex_replacements = array("","","\n","");
                             $yaml = preg_replace($regex_patterns,$regex_replacements,$yaml);
 
-                            $fileName = $this->outputDir."/".time()."-test".$counter.".yml";
-                                        file_put_contents($fileName,$behatyml.PHP_EOL);
-                                        $add = trim($yaml);
+                            $clOS = str_replace(' ','',$val['os']);
+                            $clBrowser = str_replace(' ','',$val['browser']);
+                            $clVersion = str_replace(' ','';$val['browser-version']);
+                            $fileName = $this->outputDir."/".$clOS."-".$clBrowser."-".$clVersion.".yml";
+
+                            file_put_contents($fileName,$behatyml.PHP_EOL);
+                            $add = trim($yaml);
                             file_put_contents($fileName,$add.PHP_EOL, FILE_APPEND);
 
                             $counter++;
@@ -179,7 +184,10 @@
 
     <target name="run-behat">
         <copy file="${absfilename}" tofile="${filename}" overwrite="true"/>
-        <exec command="${test.behatBinLoc} --config ${filename} --profile sauce ${test.behatFeaturesLoc}" passthru="true"/>
+        <php function="basename" returnProperty="testname">
+            <param value="${filename}"/>
+        </php>
+        <exec command="${test.behatBinLoc} --config ${filename} --profile sauce --format html --out reports/${testname}.html ${test.behatFeaturesLoc}" passthru="true"/>
         <exec command="rm ${filename}"/>
     </target>
 </project>
