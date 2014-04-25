@@ -225,15 +225,15 @@
 
     <target name="run-behat">
         <copy file="${absfilename}" tofile="${filename}" overwrite="true"/>
-        <php function="basename" returnProperty="testname">
+        <php function="basename" returnProperty="newname">
             <param value="${filename}"/>
         </php>
         <exec command="${test.behatBinLoc} --config ${filename} --profile sauce ${test.behatFeaturesLoc}" passthru="true"/>
         <foreach param="xmlfile" absparam="absxmlfile" target="update-xml-name">
-            <fileset dir="reports/xml/junit/${testname}">
+            <fileset dir="reports/xml/junit/${newname}">
                 <include name="*.xml"/>
             </fileset>
-            <property name="newName" value="${testname}"/>
+            <property name="newName" value="${newname}"/>
         </foreach>
         <exec command="rm ${filename}"/>
     </target>
