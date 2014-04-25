@@ -110,7 +110,7 @@
                         $clBrowser = str_replace(' ','',$val['browser']);
                         $clVersion = str_replace(' ','',$val['browser-version']);
 
-                        $htmlOutputPath = "reports/html/".$clOs."-".$clBrowser."-".$clVersion.".html";
+                        $htmlOutputPath = "reports/html/".$clOS."-".$clBrowser."-".$clVersion.".html";
 
                         if(is_array($val)) {
                             $yaml = array(
