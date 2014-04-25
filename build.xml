@@ -237,6 +237,7 @@
     </target>
 
     <target name="update-xml-name">
+        <echo message="Updating junit name filename = ${absxmlfile} and newName = ${newName}"/>
         <updateJUnitName fileName="${absxmlfile}" newName="${newName}"/>
     </target>
 </project>
