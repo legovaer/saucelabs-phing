@@ -110,7 +110,7 @@
                                     'filters' => array(
                                         'tags' => '@multibrowsers'
                                     ),
-                                    'contect' => array(
+                                    'context' => array(
                                         'parameters' => array(
                                             'test-name' => $this->name
                                         )
