@@ -196,7 +196,7 @@
         <php function="basename" returnProperty="testname">
             <param value="${filename}"/>
         </php>
-        <exec command="${test.behatBinLoc} --config ${filename} --profile sauce --format html --out reports/${testname}.html ${test.behatFeaturesLoc}" passthru="true"/>
+        <exec command="${test.behatBinLoc} --config ${filename} --profile sauce ${test.behatFeaturesLoc}" passthru="true"/>
         <exec command="rm ${filename}"/>
     </target>
 </project>
