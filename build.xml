@@ -186,7 +186,7 @@
                     
                     // Write the updated name to the file
                     $xml->testcase['name'] = $oldName . "[ ".$newName." ]";
-                    $xml->asXML("test.xml");
+                    $xml->asXML($this->fileName);
                 }
 
             }
