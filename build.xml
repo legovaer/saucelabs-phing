@@ -58,7 +58,7 @@
         <mkdir dir="reports"/>
         <mkdir dir="reports/html"/>
         <mkdir dir="reports/xml"/>
-        <mkdir dir="repotrs/xml/junit"/>
+        <mkdir dir="reports/xml/junit"/>
         <touch file="${test.jsonFile}" />
         <touch file="${test.wdhostFile}" />
     </target>
