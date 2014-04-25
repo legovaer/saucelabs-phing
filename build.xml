@@ -137,7 +137,7 @@
 
                             $clOS = str_replace(' ','',$val['os']);
                             $clBrowser = str_replace(' ','',$val['browser']);
-                            $clVersion = str_replace(' ','';$val['browser-version']);
+                            $clVersion = str_replace(' ','',$val['browser-version']);
                             $fileName = $this->outputDir."/".$clOS."-".$clBrowser."-".$clVersion.".yml";
 
                             file_put_contents($fileName,$behatyml.PHP_EOL);
