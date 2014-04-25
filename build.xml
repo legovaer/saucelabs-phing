@@ -162,7 +162,7 @@
             }
         ]]></adhoc-task>
         <adhoc-task name="updateJUnitName"><![CDATA[
-            class ymlGenerator extends Task {
+            class updateJUnitName extends Task {
             
                 private $fileName = null;
                 private $newName = null;
