@@ -116,7 +116,7 @@
                             $yaml = array(
                                 'sauce' => array(
                                     'formatter' => array(
-                                        name => pretty,junit,html,
+                                        name => 'pretty,junit,html',
                                         parameters => array(
                                             output_path => null,reports/xml/junit,$htmlOutputPath
                                         )
