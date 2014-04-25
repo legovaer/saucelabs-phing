@@ -144,7 +144,6 @@
                                     )
                                 )
                             );
-                            var_dump($yaml);
                             $yaml = yaml_emit($yaml);
                             $regex_patterns = array("/---\n/","/\.\.\./","/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/","/|/");
                             $regex_replacements = array("","","\n","");
