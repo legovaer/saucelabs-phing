@@ -50,6 +50,7 @@
 
     <target name="clean-up">
         <delete dir="${test.outputDir}" />
+        <delete dir="reports" />
     </target>
 
     <target name="prepare">
