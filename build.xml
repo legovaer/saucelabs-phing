@@ -65,7 +65,7 @@
 
     <target name="init-ad-hoc-tasks">
        <includepath classpath="${phing.dir}" />
-       <taskdef name="ymlGenerator" classname="src.task.ymlGenerator" />
+       <taskdef name="generateYml" classname="src.task.ymlGenerator" />
        <taskdef name="updateJUnitName" classname="src.task.updateJUnitName" />
     </target>
 
