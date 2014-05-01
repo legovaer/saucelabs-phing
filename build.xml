@@ -64,8 +64,8 @@
     </target>
 
     <target name="init-ad-hoc-tasks">
-       <taskdef name="ymlGenerator" classname="src.task.ymlGenerator" />
-       <taskdef name="updateJUnitName" classname="src.task.updateJUnitName" />
+       <taskdef name="ymlGenerator" classname="src.task.ymlGenerator" file="${phing.dir}/src/task/ymlGenerator.php" />
+       <taskdef name="updateJUnitName" classname="src.task.updateJUnitName" file="${phing.dir}/src/task/updateJUnitName.php" />
     </target>
 
     <target name="generate-json-file">
