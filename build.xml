@@ -10,7 +10,6 @@
         <property name="test.wdhostFile" value="${test.outputDir}/wdhost"/>
         <exec command="echo ${SAUCE_USER_NAME}" outputProperty="sauce.uname"/>
         <exec command="echo ${SAUCE_API_KEY}" outputProperty="sauce.apikey"/>
-        <echo message="apikey ${sauce.apikey}"/>
     </target>
 
     <target name="run-check">
@@ -89,7 +88,6 @@
             </then>
             <else>
                 <loadfile file="${test.wdhostFile}" property="wdhostFile"/>
-                <echo message="apikey ${sauce.apikey}"/>
                 <generateYml testName="${test.testName}" jsonFile="${test.jsonFile}" outputDir="${test.outputDir}" uname="${sauce.uname}" apikey="${sauce.apikey}" behatymlFile="${test.behatYmlLoc}"/>
             </else>
         </if>

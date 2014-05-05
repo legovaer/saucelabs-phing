@@ -6,7 +6,7 @@
  * Time: 12:32
  */
 
-class updateJUnitName {
+class updateJUnitName extends Task {
     private $fileName = null;
     private $newName = null;
 
