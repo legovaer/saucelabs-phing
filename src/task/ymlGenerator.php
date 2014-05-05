@@ -52,8 +52,7 @@ class ymlGenerator extends Task {
         $counter = 1;
 
         foreach ($jsonIterator as $key => $val) {
-            $clOS = str_replace(' ','',$val[
-}'os']);
+            $clOS = str_replace(' ','',$val['os']);
             $clBrowser = str_replace(' ','',$val['browser']);
             $clVersion = str_replace(' ','',$val['browser-version']);
 
