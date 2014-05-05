@@ -52,7 +52,8 @@ class ymlGenerator extends Task {
         $counter = 1;
 
         foreach ($jsonIterator as $key => $val) {
-            $clOS = str_replace(' ','',$val['os']);
+            $clOS = str_replace(' ','',$val[
+}'os']);
             $clBrowser = str_replace(' ','',$val['browser']);
             $clVersion = str_replace(' ','',$val['browser-version']);
 
@@ -79,8 +80,8 @@ class ymlGenerator extends Task {
                             'Behat\MinkExtension\Extension' => array(
                                 'javascript_session' => 'saucelabs',
                                 'saucelabs' => array(
-                                    'username' => $val['uname'],
-                                    'access_key' => $val['apikey'],
+                                    'username' => $this->uname,
+                                    'access_key' => $this->apikey,
                                     'capabilities' => array(
                                         'platform' => $val['os'],
                                         'version' => $val['browser-version'],
