@@ -4,8 +4,8 @@
     <target name="debug">
         <echo message="${SAUCE_USER_NAME} SAUCE UNAME"/>
         <echo message="${SAUCE_API_KEY} SAUCE API KEY"/>
-        <exec command="echo ${SAUCE_USER_NAME}" passthru="true" outputProperty="test"/>
-        <echo message="${test} test"/>
+        <exec command="echo ${SAUCE_USER_NAME}" outputProperty="test.uname"/>
+        <echo message="${test.uname} test"/>
     </target>
     <target name="load-properties">
         <property file="${phing.dir}/slphing.properties" />
