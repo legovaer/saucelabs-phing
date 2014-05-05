@@ -64,7 +64,7 @@ class ymlGenerator extends Task {
                         'formatter' => array(
                             name => 'pretty,junit,html',
                             parameters => array(
-                                output_path => 'null,reports/xml/junit/'.$clOS.'-'.$clBrowser.'-'.$clVersion.'.xml,'.$htmlOutputPath
+                                output_path => 'null,reports/xml/junit/'.$clOS.'-'.$clBrowser.'-'.$clVersion.','.$htmlOutputPath
                             )
                         ),
                         'filters' => array(
