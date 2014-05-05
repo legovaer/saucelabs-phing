@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="saucelabs-phing" default="init" basedir="../workspace">
+<project name="saucelabs-phing" default="debug" basedir="../workspace">
     <target name="init" depends="load-properties, run-check, clean-up, prepare, init-ad-hoc-tasks, generate-json-file, generate-yaml, loop-yamls"></target>
-
+    <target name="debug">
+        <echo message="${SAUCE_USER_NAME} SAUCE UNAME"/>
+        <echo message="${SAUCE_API_KEY} SAUCE API KEY"/>
+    </target>
     <target name="load-properties">
         <property file="${phing.dir}/slphing.properties" />
         <property name="test.testName" value="${testname}"/>
