@@ -77,7 +77,7 @@ class ymlGenerator extends Task {
                         ),
                         'extensions' => array(
                             'Behat\MinkExtension\Extension' => array(
-                                'javascript_session' => 'saucelabs',
+                                'default_session' => 'saucelabs',
                                 'saucelabs' => array(
                                     'username' => $this->uname,
                                     'access_key' => $this->apikey,
