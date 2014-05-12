@@ -77,14 +77,16 @@ class ymlGenerator extends Task {
                         ),
                         'extensions' => array(
                             'Behat\MinkExtension\Extension' => array(
-                                'default_session' => 'saucelabs',
-                                'saucelabs' => array(
-                                    'username' => $this->uname,
-                                    'access_key' => $this->apikey,
+                                'default_session' => 'selenium2',
+                                'selenium2' => array(
+                                    'browser' => $val['browser'],
+                                    'wd_host' => $this->uname.':'.$this->apikey.'@ondemand.saucelabs.com/wd/hub',
                                     'capabilities' => array(
+                                        'browser' => $val['browser'],
                                         'platform' => $val['os'],
                                         'version' => $val['browser-version'],
-                                        'name' => '['.$this->name.'] '.$val['os'].' '.$val['browser']
+                                        'name' => '['.$this->name.'] '.$val['os'].' '.$val['browser'],
+                                        'selenium-version' => '2.38.0'
                                     )
                                 )
                             )
